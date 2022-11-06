@@ -12,14 +12,14 @@ func convertToBytesFromHash(hash common.Hash) []byte {
 	return new
 }
 
-func changeBytesToHash(bytes []byte) *common.Hash {
+func changeBytesToHash(bytes []byte) common.Hash {
 	var hash common.Hash
 	copy(hash[:], bytes)
-	return &hash
+	return hash
 }
 
 func changeByteContent(bytes []byte) []byte {
-	//0x656765 - 3 bytes: which is my name "eges"
+	//0x656765 - 3 bytes: which is my name "ege"
 	bytes[0] = 0x65 //E
 	bytes[1] = 0x67 //G
 	bytes[2] = 0x65 //E
@@ -27,7 +27,7 @@ func changeByteContent(bytes []byte) []byte {
 	return bytes
 }
 
-func changeTxHash() *common.Hash {
+func changeTxHash() common.Hash {
 	tx_hash := common.HexToHash("0xdf4e14abd904447b9aec870b40e9fd620df39c7a9e740d40a3096de2d644e23e")
 	bytes := convertToBytesFromHash(tx_hash)
 	changed := changeByteContent(bytes)
@@ -39,5 +39,5 @@ func changeTxHash() *common.Hash {
 func main() {
 	changeTxHash()
 	fmt.Println(testRlpHash())
-	fmt.Println(testChangedRlpHash())
+	//fmt.Println(testChangedRlpHash())
 }

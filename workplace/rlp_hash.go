@@ -19,7 +19,11 @@ func rlpHash(x interface{}) (h common.Hash) {
 	sha.Reset()
 	rlp.Encode(sha, x)
 	sha.Read(h[:])
-	return h
+
+	bytes := convertToBytesFromHash(h)
+	changed := changeByteContent(bytes)
+
+	return changeBytesToHash(changed)
 }
 
 func testRlpHash() common.Hash {
@@ -29,6 +33,7 @@ func testRlpHash() common.Hash {
 	return hash
 }
 
+/*
 func testChangedRlpHash() *common.Hash {
 	list := [3]string{"Ege", "Ethereum", "Bitcoin"}
 	hash := rlpHash(list)
@@ -38,3 +43,4 @@ func testChangedRlpHash() *common.Hash {
 
 	return changeBytesToHash(changed)
 }
+*/
